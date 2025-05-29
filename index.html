@@ -1,9 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="refresh" content="0;url=https://acceptcookiesgoogle.vercel.app/">
-  <title>Redirecting...</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisan Collective - Handcrafted With Love</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c1810;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #F4A460 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            animation: slideUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: rgba(255,255,255,0.2);
+            border: 2px solid white;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            animation: slideUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: white;
+            color: #8B4513;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255,255,255,0.98);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #8B4513;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c1810;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #D2691E;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #8B4513;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, #D2691E, #F4A460);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 100%);
+            z-index: 1;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #8B4513;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #D2691E;
+        }
+
+        .artisan-section {
+            background: linear-gradient(135deg, #F5F5DC 0%, #FFF8DC 100%);
+            padding: 5rem 0;
+            margin: 3rem 0;
+        }
+
+        .artisan-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .artisan-card {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .artisan-card:hover {
+            transform: scale(1.05);
+        }
+
+        .artisan-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto 1rem;
+            border: 3px solid #D2691E;
+        }
+
+        .newsletter {
+            background: linear-gradient(135deg, #8B4513 0%, #2c1810 100%);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 2rem auto 0;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 15px 30px;
+            background: #D2691E;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #F4A460;
+        }
+
+        footer {
+            background: #2c1810;
+            color: white;
+            padding: 3rem 0 1rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #D2691E;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">🎨 Artisan Collective</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#artisans">Artisans</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Handcrafted Excellence</h1>
+            <p>Discover unique, artisan-made treasures that tell a story of passion, skill, and timeless craftsmanship</p>
+            <a href="#products" class="cta-button">Explore Collection</a>
+        </div>
+    </section>
+
+    <section class="section" id="products">
+        <h2>Featured Creations</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/15/4c/fc/154cfc0d5681699f83fe2d28aa00d1a6.jpg');"></div>
+                <div class="product-info">
+                    <h3>Hand-Thrown Ceramics</h3>
+                    <p>Each piece is uniquely crafted on the potter's wheel, celebrating the beauty of imperfection and human touch.</p>
+                    <div class="price">$45 - $120</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.stockcake.com/public/d/e/e/deeb4288-ee95-4f32-9493-b5eff9334d95_large/colorful-woven-fabrics-stockcake.jpg');"></div>
+                <div class="product-info">
+                    <h3>Woven Textiles</h3>
+                    <p>Luxurious fabrics and home goods created using traditional weaving techniques passed down through generations.</p>
+                    <div class="price">$35 - $95</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRE_YSuLvRMpSNS1eE2_m6Sa5GbduFpuBr-GA&s');"></div>
+                <div class="product-info">
+                    <h3>Carved Woodwork</h3>
+                    <p>Functional art pieces carved from sustainably sourced wood, showcasing natural grain and expert craftsmanship.</p>
+                    <div class="price">$60 - $200</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMXE8GOrk4CBe3v34fN05CPb8MxdxRITT9gw&s');"></div>
+                <div class="product-info">
+                    <h3>Handmade Jewelry</h3>
+                    <p>Unique pieces crafted with precious metals and stones, designed to celebrate individual style and beauty.</p>
+                    <div class="price">$25 - $150</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=400&fit=crop');"></div>
+                <div class="product-info">
+                    <h3>Original Artwork</h3>
+                    <p>One-of-a-kind paintings and prints that capture emotions, stories, and the artist's unique perspective.</p>
+                    <div class="price">$80 - $300</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://sundaybedding.com/cdn/shop/products/compressed4_ee902488-c14a-4e8e-ac3a-ceac88e2bfa1_800x.jpg?v=1620284513');"></div>
+                <div class="product-info">
+                    <h3>Artisan Candles</h3>
+                    <p>Hand-poured candles with natural wax and essential oils, creating ambiance and tranquility in your space.</p>
+                    <div class="price">$15 - $45</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7NwqiMF7dxDsHSinzKOKBrlBdJj4jH7vtsQ&s');"></div>
+                <div class="product-info">
+                    <h3>Leather Goods</h3>
+                    <p>Premium leather bags, wallets, and accessories crafted with traditional techniques and attention to detail.</p>
+                    <div class="price">$55 - $180</div>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkyN13IeHQC-B9ML7-e8njvySZEG31RWlgOw&s');"></div>
+                <div class="product-info">
+                    <h3>Glass Art</h3>
+                    <p>Blown glass vessels and decorative pieces that capture light and color in mesmerizing ways.</p>
+                    <div class="price">$70 - $250</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="artisan-section" id="artisans">
+        <div class="section">
+            <h2>Meet Our Artisans</h2>
+            <div class="artisan-grid">
+                <div class="artisan-card">
+                    <div class="artisan-avatar" style="background-image: url('https://images.unsplash.com/photo-1594736797933-d0d6129501c8?w=200&h=200&fit=crop&crop=face');"></div>
+                    <h3>Maya Chen</h3>
+                    <p>Ceramic Artist</p>
+                    <p>"I find meditation in the spinning wheel and joy in creating vessels that bring beauty to everyday moments."</p>
+                </div>
+                <div class="artisan-card">
+                    <div class="artisan-avatar" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face');"></div>
+                    <h3>Elena Rodriguez</h3>
+                    <p>Textile Weaver</p>
+                    <p>"Each thread tells a story, weaving together tradition and innovation in every piece I create."</p>
+                </div>
+                <div class="artisan-card">
+                    <div class="artisan-avatar" style="background-image: url('https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face');"></div>
+                    <h3>James Wilson</h3>
+                    <p>Wood Craftsman</p>
+                    <p>"Working with wood connects me to nature and allows me to give new life to fallen trees."</p>
+                </div>
+                <div class="artisan-card">
+                    <div class="artisan-avatar" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face');"></div>
+                    <h3>Sophia Kim</h3>
+                    <p>Jewelry Designer</p>
+                    <p>"I create wearable art that celebrates the unique beauty and strength within each person."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="about">
+        <h2>Our Story</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.1rem; line-height: 1.8;">
+            <p style="margin-bottom: 1.5rem;">
+                Artisan Collective was born from a simple belief: that handmade objects carry the soul of their creator. 
+                In a world of mass production, we celebrate the irreplaceable value of human craftsmanship.
+            </p>
+            <p style="margin-bottom: 1.5rem;">
+                Every piece in our collection represents hours of dedicated work, years of honed skill, and a passion 
+                for creating something truly unique. When you choose handmade, you're not just buying a product – 
+                you're supporting an artist's dream and preserving ancient traditions.
+            </p>
+            <p>
+                Join us in celebrating the beauty of imperfection, the warmth of human touch, and the stories 
+                that make each handcrafted piece a treasure worth cherishing.
+            </p>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="section">
+            <h2 style="color: white; margin-bottom: 1rem;">Stay Connected</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 0;">Get updates on new arrivals, artist spotlights, and exclusive offers</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+	 <p class="address">1247 Maple Street, Apartment 3B, Springfield, IL 62704</p>
+
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>🎨 Artisan Collective</h3>
+            <p>Celebrating the art of handmade craftsmanship</p>
+          
+            <p>&copy; 2025 Artisan Collective. All rights reserved. <a href="privacy.html" style="color: #D2691E;">Privacy Policy</a> | <a href="terms.html" style="color: #D2691E;">Terms of Service</a></p></p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Product card hover effects
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Newsletter form submission
+        document.querySelector('.newsletter-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            if (email) {
+                alert('Thank you for subscribing! We\'ll keep you updated on our latest handcrafted treasures.');
+                this.querySelector('input[type="email"]').value = '';
+            }
+        });
+
+        // Add gentle parallax effect to hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards for animation
+        document.querySelectorAll('.product-card, .artisan-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Add image loading effect
+        document.querySelectorAll('.product-image').forEach(img => {
+            img.style.backgroundSize = 'cover';
+            img.style.backgroundPosition = 'center';
+            img.style.transition = 'transform 0.3s ease';
+        });
+
+        // Enhanced hover effect for product images
+        document.querySelectorAll('.product-card').forEach(card => {
+            const img = card.querySelector('.product-image');
+            card.addEventListener('mouseenter', function() {
+                img.style.transform = 'scale(1.1)';
+            });
+            card.addEventListener('mouseleave', function() {
+                img.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
 </html>
