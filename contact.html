@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Artisan Collective</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #2c1810;
+            background: #fefefe;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #8B4513;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2c1810;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #D2691E;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: #D2691E;
+        }
+
+        .hero-header {
+            background: linear-gradient(135deg, #8B4513 0%, #D2691E 50%, #F4A460 100%);
+            padding: 8rem 0 4rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-header::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            z-index: 2;
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: -2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-form-section {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .contact-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .contact-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-card h3 {
+            color: #8B4513;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-card p {
+            margin-bottom: 0.5rem;
+            color: #2c1810;
+        }
+
+        .contact-card a {
+            color: #D2691E;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .contact-card a:hover {
+            color: #8B4513;
+        }
+
+        .form-title {
+            color: #8B4513;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #D2691E, #F4A460);
+            bottom: 0;
+            left: 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c1810;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            background: #fafafa;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #D2691E;
+            box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+            background: white;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #D2691E, #F4A460);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(210, 105, 30, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .hours-section {
+            background: linear-gradient(135deg, #F5F5DC 0%, #FFF8DC 100%);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid #D2691E;
+        }
+
+        .hours-title {
+            color: #8B4513;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .hours-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .hours-item:last-child {
+            border-bottom: none;
+        }
+
+        .day {
+            font-weight: bold;
+            color: #2c1810;
+        }
+
+        .time {
+            color: #8B4513;
+        }
+
+        .map-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .map-placeholder {
+            background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+            height: 300px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem 0;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .faq-section {
+            margin-top: 3rem;
+        }
+
+        .faq-title {
+            color: #8B4513;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .faq-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(90deg, #D2691E, #F4A460);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .faq-question {
+            color: #8B4513;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .faq-answer {
+            color: #2c1810;
+            line-height: 1.6;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d4edda, #c3e6cb);
+            color: #155724;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #28a745;
+            display: none;
+        }
+
+        .back-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #D2691E, #F4A460);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(210, 105, 30, 0.3);
+        }
+
+        footer {
+            background: #2c1810;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            color: #D2691E;
+        }
+
+        @media (max-width: 768px) {
+            .hero-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin: 0 10px;
+                margin-top: -2rem;
+            }
+            
+            .contact-form-section,
+            .contact-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .hours-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 2rem 10px;
+            }
+        }
+
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">🎨 Artisan Collective</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#artisans">Artisans</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact" class="active">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="hero-header">
+        <h1>Get in Touch</h1>
+        <p>We'd love to hear from you. Reach out with questions, feedback, or just to say hello!</p>
+    </div>
+
+    <div class="container">
+        <a href="index.html" class="back-button">← Back to Home</a>
+        
+        <div class="contact-grid">
+            <div class="contact-form-section">
+                <h2 class="form-title">Send us a Message</h2>
+                <div class="success-message" id="successMessage">
+                    ✅ Thank you for your message! We'll get back to you within 24 hours.
+                </div>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Please select a topic</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="order">Order Support</option>
+                            <option value="product">Product Question</option>
+                            <option value="artisan">Artisan Partnership</option>
+                            <option value="wholesale">Wholesale Inquiry</option>
+                            <option value="press">Press & Media</option>
+                            <option value="technical">Technical Support</option>
+                            <option value="feedback">Feedback & Suggestions</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number (if applicable)</label>
+                        <input type="text" id="orderNumber" name="orderNumber" placeholder="e.g., AC-2025-001234">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us how we can help you..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        Send Message 📩
+                    </button>
+                </form>
+            </div>
+            
+            <div class="contact-info-section">
+                <div class="contact-card">
+                    <span class="contact-card-icon">📞</span>
+                    <h3>Call Us</h3>
+                    <p><strong>Customer Service:</strong></p>
+                    <p><a href="tel:+15551234567">(555) 123-CRAFT</a></p>
+                    <p><strong>Wholesale Inquiries:</strong></p>
+                    <p><a href="tel:+15551234568">(555) 123-SALE</a></p>
+                    <p><em>Monday - Friday: 9 AM - 6 PM EST<br>
+                    Saturday: 10 AM - 4 PM EST</em></p>
+                </div>
+                
+                <div class="contact-card">
+                    <span class="contact-card-icon">📧</span>
+                    <h3>Email Us</h3>
+                    <p><strong>General:</strong> <a href="mailto:hello@artisancollective.com">hello@artisancollective.com</a></p>
+                    <p><strong>Orders:</strong> <a href="mailto:orders@artisancollective.com">orders@artisancollective.com</a></p>
+                    <p><strong>Artisan Partnership:</strong> <a href="mailto:artisans@artisancollective.com">artisans@artisancollective.com</a></p>
+                    <p><strong>Press:</strong> <a href="mailto:press@artisancollective.com">press@artisancollective.com</a></p>
+                    <p><em>We typically respond within 24 hours</em></p>
+                </div>
+                
+                <div class="contact-card">
+                    <span class="contact-card-icon">📍</span>
+                    <h3>Visit Our Studio</h3>
+                    <p><strong>Artisan Collective Headquarters</strong></p>
+                    <p>123 Craft Street<br>
+                    Maker City, MC 12345<br>
+                    United States</p>
+                    <p><em>By appointment only<br>
+                    <a href="mailto:visit@artisancollective.com">Email to schedule</a></em></p>
+                </div>
+                
+                <div class="contact-card">
+                    <span class="contact-card-icon">💬</span>
+                    <h3>Live Chat</h3>
+                    <p>Get instant help with our live chat support</p>
+                    <p><strong>Available:</strong><br>
+                    Monday - Friday: 9 AM - 8 PM EST<br>
+                    Saturday: 10 AM - 6 PM EST</p>
+                    <button onclick="openLiveChat()" style="background: linear-gradient(135deg, #D2691E, #F4A460); color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; margin-top: 10px;">Start Chat 💭</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hours-section">
+            <h3 class="hours-title">⏰ Business Hours</h3>
+            <div class="hours-grid">
+                <div class="hours-item">
+                    <span class="day">Monday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="day">Tuesday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="day">Wednesday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="day">Thursday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="day">Friday</span>
+                    <span class="time">9:00 AM - 6:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="day">Saturday</span>
+                    <span class="time">10:00 AM - 4:00 PM</span>
+                </div>
+                <div class="hours-item">
+                    <span class="day">Sunday</span>
+                    <span class="time">Closed</span>
+                </div>
+                <div class="hours-item" style="grid-column: 1 / -1; border-top: 2px solid rgba(139, 69, 19, 0.2); margin-top: 10px; padding-top: 15px;">
+                    <span class="day">Holiday Hours</span>
+                    <span class="time">Check our website for updates</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="map-section">
+            <h3 style="color: #8B4513; margin-bottom: 1rem;">📍 Find Us Here</h3>
+            <div class="map-placeholder">
+                🗺️ Interactive Map Coming Soon<br>
+                <small>1247 Maple Street, Apartment 3B, Springfield, IL 62704</small>
+            </div>
+            <p style="color: #2c1810; margin-top: 1rem;">
+                Located in the heart of the arts district, our studio welcomes visitors by appointment. 
+                We're easily accessible by public transportation and offer street parking.
+            </p>
+        </div>
+        
+        <div class="faq-section">
+            <h2 class="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">🚚 How long does shipping take?</div>
+                    <div class="faq-answer">Standard shipping takes 3-7 business days within the US. Express shipping is available for 1-2 day delivery. International shipping times vary by location.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">🔄 What's your return policy?</div>
+                    <div class="faq-answer">We offer a 30-day return window for most items in original condition. Custom and personalized items may have different return policies.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">🎨 Can I become an artisan partner?</div>
+                    <div class="faq-answer">We're always looking for talented artisans! Email us at artisans@artisancollective.com with samples of your work and we'll be in touch.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">💳 What payment methods do you accept?</div>
+                    <div class="faq-answer">We accept all major credit cards, PayPal, Apple Pay, Google Pay, and gift cards. All transactions are secure and encrypted.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">🏢 Do you offer wholesale pricing?</div>
+                    <div class="faq-answer">Yes! We offer wholesale pricing for qualifying retailers. Contact us at wholesale@artisancollective.com for more information.</div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">🎁 Can I request custom orders?</div>
+                    <div class="faq-answer">Many of our artisans accept custom orders. Contact the specific artisan through their product page or email us for assistance.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <h3>🎨 Artisan Collective</h3>
+            <p>Celebrating the art of handmade craftsmanship</p>
+          
+            <p>&copy; 2025 Artisan Collective. All rights reserved. | <a href="privacy.html" style="color: #D2691E;">Privacy Policy</a> | <a href="terms.html" style="color: #D2691E;">Terms of Service</a></p>
+        </div>
+    </footer>
+    
+    <script>
+        // Form submission handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Show loading state
+            submitBtn.classList.add('loading');
+            submitBtn.innerHTML = '<span class="spinner"></span>Sending...';
+            submitBtn.disabled = true;
+            
+            // Simulate form submission (replace with actual form handling)
+            setTimeout(() => {
+                // Show success message
+                successMessage.style.display = 'block';
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.classList.remove('loading');
+                submitBtn.innerHTML = 'Message Sent! ✅';
+                submitBtn.style.background = 'linear-gradient(135deg, #28a745, #34ce57)';
+                
+                // Reset button after 3 seconds
+                setTimeout(() => {
+                    submitBtn.innerHTML = 'Send Message 📩';
+                    submitBtn.style.background = 'linear-gradient(135deg, #D2691E, #F4A460)';
+                    submitBtn.disabled = false;
+                    
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 2000);
+                }, 3000);
+            }, 2000);
+        });
+        
+        // Live chat function
+        function openLiveChat() {
+            // Simulate live chat opening
+            alert('Live chat would open here! 💬\n\nFor now, please use our contact form or email us directly.');
+        }
+        
+        // Add scroll effect for navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255,255,255,0.98)';
+            } else {
+                navbar.style.background = 'rgba(255,255,255,0.95)';
+            }
+        });
+        
+        // Add fade-in animation for content sections
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all contact cards and FAQ items
+        document.querySelectorAll('.contact-card, .faq-item, .hours-section, .map-section').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
+        });
+        
+        // Form validation enhancements
+        const inputs = document.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#dc3545';
+                } else if (this.type === 'email' && this.value && !isValidEmail(this.value)) {
+                    this.style.borderColor = '#dc3545';
+                } else {
+                    this.style.borderColor = '#28a745';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#D2691E';
+            });
+        });
+        
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
